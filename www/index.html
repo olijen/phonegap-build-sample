@@ -51,11 +51,13 @@
         </div>
         
         
-        <a href="https://ingello.com/">ππππ2rr</a>
+        <a href="https://ingello.com/">INGELLO</a>
+        <a href="/spec.html">SPEC</a>
+        <a href="https://ingello.com/" class="load"> | load | </a>
 
-        <a onclick="window.load('https://ingello.com/')">ππππ2×××rr</a>
+        <a onclick="window.load('https://ingello.com/')"> | winload | </a>
 
-        <a onclick="cordova.InAppBrowser.open(event.data.href, '_system');">ππ√√√√√</a>
+        <a onclick="cordova.InAppBrowser.open(event.data.href, '_system');"> | browser open | </a>
         
         
     </div>
@@ -70,7 +72,7 @@
     <script type="text/javascript">
         //app.initialize();
         alert('start');
-        window.load = function(){
+        var l = function(){
             alert('loaded');
             $(document).on('click', 'a[href^=http], a[href^=https]', function(e){
                    alert('dddd')
@@ -81,6 +83,9 @@
                 window.open($this.attr('href'), target, 'location=no');
             });
         }
+        
+        setTimeout(l, 2000);
+        
     </script>
 </body>
 
