@@ -34,6 +34,19 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 	    
+	    //PERMIS
+	    
+	    //plugins ready
+	app.permissions = cordova.plugins.permissions;
+	console.log(app.permissions);
+	//add button listeners
+	console.log('adding listeners')
+	document.getElementById('btnGeo').addEventListener('click', app.geoPerm);
+	    
+	    //CLICK LOAD
+	    
+	    
+	    
 	    $(document).on('click', '.load', function(e){
                 alert('dddd')
                 e.preventDefault();
@@ -79,6 +92,26 @@ var app = {
 		});
 		
     },
+	geoPerm: function () {
+        let perms = ["android.permission.ACCESS_COARSE_LOCATION",
+            "android.permission.ACCESS_FINE_LOCATION",
+            "android.permission.ACCESS_BACKGROUND_LOCATION"
+        ]
+        app.permissions.checkPermission("android.permission.ACCESS_COARSE_LOCATION", function (status) {
+            console.log('success checking permission');
+            console.log('HAS ACCESS_COURSE_LOCATION:', status.hasPermission);
+            if (!status.hasPermission) {
+                app.permissions.requestPermissions(perms, function (status) {
+                    console.log('success requesting ACCESS_*_LOCATION permission');
+                }, function (err) {
+                    console.log('failed to set permission');
+                });
+            }
+        }, function (err) {
+            console.log(err);
+        });
+    },
+	
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
