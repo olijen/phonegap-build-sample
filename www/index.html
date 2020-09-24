@@ -45,24 +45,24 @@
 <body>
     <div class="app">
         <h1>Ingello</h1>
+        
         <div id="deviceready" class="blink">
             <p class="event listening">Connecting to Device</p>
             <p class="event received">Device is Ready</p>
         </div>
         
+        <a href="https://ingello.com/"> INGELLO </a> <br><br>
+        <a href="https://garage.ingello.com/"> GARAGE </a> <br><br>
+        <a href="https://garage.ingello.com/site/home"> GARAGE H </a> <br><br>
         
-        <a href="https://ingello.com/"> INGELLO </a>
-        <a href="https://garage.ingello.com/"> GARAGE </a>
-        <a href="https://garage.ingello.com/site/home"> GARAGE H </a>
+        <a href="https://garage.ingello.com/site/home" class="load"> GARAGE HL </a> <br><br>
         
-        <a href="https://garage.ingello.com/site/home" class="load"> GARAGE HL </a>
-        
-        <a href="/spec.html">SPEC</a>
-        <a href="https://ingello.com/" class="load"> | load | </a>
+        <a href="/spec.html">SPEC</a> <br><br>
+        <a href="https://ingello.com/" class="load"> | load | </a> <br><br>
 
-        <a onclick="window.load('https://ingello.com/')"> | winload | </a>
+        <a onclick="window.load('https://ingello.com/')"> | winload | </a> <br><br>
 
-        <a onclick="cordova.InAppBrowser.open(event.data.href, '_system');"> | browser open | </a>
+        <a onclick="cordova.InAppBrowser.open(event.data.href, '_system');"> | browser open | </a> <br><br>
         
         
     </div>
@@ -75,21 +75,20 @@
   crossorigin="anonymous"></script>
     
     <script type="text/javascript">
-        //app.initialize();
+        app.initialize();
         alert('start');
-        var l = function(){
+        var l = function() {
             alert('loaded');
-            $(document).on('click', 'a[href^=http], a[href^=https]', function(e){
-                   alert('dddd')
+            $(document).on('click', '.load', function(e){
+                alert('dddd')
                 e.preventDefault();
                 var $this = $(this); 
                 var target = $this.data('inAppBrowser') || '_blank';
-
                 window.open($this.attr('href'), target, 'location=no');
             });
         }
         
-        setTimeout(l, 2000);
+        setTimeout(l, 4000);
         
     </script>
     
