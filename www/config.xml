@@ -77,4 +77,7 @@
         <allow-intent href="itms-apps:*" />
     </platform>
 	
+	<plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
+    <engine name="android" spec="^7.1.4" />
+	
 </widget>
