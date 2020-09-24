@@ -40,7 +40,8 @@ var app = {
 	app.permissions = cordova.plugins.permissions;
 	console.log(app.permissions);
 	//add button listeners
-	console.log('adding listeners')
+	console.log('adding listeners'); 
+	    alert(app.permissions);
 	document.getElementById('btnGeo').addEventListener('click', app.geoPerm);
 	    
 	    //CLICK LOAD
