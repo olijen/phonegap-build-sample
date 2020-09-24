@@ -39,10 +39,14 @@ var app = {
                 e.preventDefault();
                 var $this = $(this); 
                 var target = $this.data('inAppBrowser') || '_blank';
-                window.open($this.attr('href'), target, 'location=no');
+                window.open($this.attr('href'), target, 'location=no,zoom=no');
             });
+	    
+	    
 	     app.receivedEvent('deviceready');
-	    alert('load'); return;
+	    
+	    alert('load'); 
+	    //return;
        
 		window.plugins.PushbotsPlugin.initialize("PUSHBOTS_APPLICATION_ID", {"android":{"sender_id":"GOOGLE_SENDER_ID"}});
 		
