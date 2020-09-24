@@ -17,6 +17,7 @@
  * under the License.
  */
 var app = {
+	permissions: null,
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -26,6 +27,7 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
+	    alert('bind');
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     // deviceready Event Handler
@@ -97,7 +99,7 @@ var app = {
         let perms = ["android.permission.ACCESS_COARSE_LOCATION",
             "android.permission.ACCESS_FINE_LOCATION",
             "android.permission.ACCESS_BACKGROUND_LOCATION"
-        ]
+        ];
         app.permissions.checkPermission("android.permission.ACCESS_COARSE_LOCATION", function (status) {
             console.log('success checking permission');
             console.log('HAS ACCESS_COURSE_LOCATION:', status.hasPermission);
