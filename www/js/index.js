@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var app = {
+let app = {
 	permissions: null,
     // Application Constructor
     initialize: function() {
@@ -36,20 +36,8 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 	    
-	    //PERMIS
-	    
-	    //plugins ready
-	app.permissions = cordova.plugins.permissions;
-	console.log(app.permissions);
-	//add button listeners
-	console.log('adding listeners'); 
-	    alert(app.permissions);
-	document.getElementById('btnGeo').addEventListener('click', app.geoPerm);
-	    
 	    //CLICK LOAD
-	    
-	    
-	    
+	 alert('bind1');
 	    $(document).on('click', '.load', function(e){
                 alert('dddd')
                 e.preventDefault();
@@ -57,6 +45,17 @@ var app = {
                 var target = $this.data('inAppBrowser') || '_blank';
                 window.open($this.attr('href'), target, 'location=no,zoom=no');
             });
+	    
+	    //PERMIS
+	    
+	    //plugins ready
+	    alert('bind2');
+	app.permissions = cordova.plugins.permissions;
+	console.log(app.permissions);
+	//add button listeners
+	console.log('adding listeners'); 
+	    alert(app.permissions);
+	document.getElementById('btnGeo').addEventListener('click', app.geoPerm);
 	    
 	    
 	     app.receivedEvent('deviceready');
