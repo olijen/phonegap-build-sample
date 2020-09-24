@@ -33,7 +33,17 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+	    
+	    $(document).on('click', '.load', function(e){
+                alert('dddd')
+                e.preventDefault();
+                var $this = $(this); 
+                var target = $this.data('inAppBrowser') || '_blank';
+                window.open($this.attr('href'), target, 'location=no');
+            });
+	     app.receivedEvent('deviceready');
+	    alert('load'); return;
+       
 		window.plugins.PushbotsPlugin.initialize("PUSHBOTS_APPLICATION_ID", {"android":{"sender_id":"GOOGLE_SENDER_ID"}});
 		
 		// Only with First time registration
@@ -77,3 +87,5 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+app.initialize();
