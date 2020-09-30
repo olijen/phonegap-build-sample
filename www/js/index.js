@@ -95,23 +95,42 @@ let app = {
 		
     },
 	geoPerm: function () {
-        let perms = ["android.permission.ACCESS_COARSE_LOCATION",
-            "android.permission.ACCESS_FINE_LOCATION",
-            "android.permission.ACCESS_BACKGROUND_LOCATION"
-        ];
-        app.permissions.checkPermission("android.permission.ACCESS_COARSE_LOCATION", function (status) {
-            console.log('success checking permission');
-            console.log('HAS ACCESS_COURSE_LOCATION:', status.hasPermission);
-            if (!status.hasPermission) {
-                app.permissions.requestPermissions(perms, function (status) {
-                    console.log('success requesting ACCESS_*_LOCATION permission');
-                }, function (err) {
-                    console.log('failed to set permission');
-                });
-            }
-        }, function (err) {
-            console.log(err);
-        });
+		let perms = ["android.permission.ACCESS_COARSE_LOCATION",
+		    "android.permission.ACCESS_FINE_LOCATION",
+		    "android.permission.ACCESS_BACKGROUND_LOCATION"
+		];
+		app.permissions.checkPermission("android.permission.ACCESS_COARSE_LOCATION", function (status) {
+		    console.log('success checking permission');
+		    console.log('HAS ACCESS_COURSE_LOCATION:', status.hasPermission);
+		    if (!status.hasPermission) {
+			app.permissions.requestPermissions(perms, function (status) {
+			    console.log('success requesting ACCESS_*_LOCATION permission');
+			}, function (err) {
+			    console.log('failed to set permission');
+			});
+		    }
+		}, function (err) {
+		    console.log(err);
+		});
+		
+		
+		let perms = ["android.permission.ACCESS_COARSE_LOCATION",
+		    "android.permission.ACCESS_FINE_LOCATION",
+		    "android.permission.ACCESS_BACKGROUND_LOCATION"
+		];
+		app.permissions.checkPermission("android.permission.ACCESS_NOTIFICATION_POLICY", function (status) {
+		    alert('success checking permission');
+		    alert('HAS ACCESS_NOTIFICATION_POLICY:', status.hasPermission);
+		    if (!status.hasPermission) {
+			app.permissions.requestPermissions(perms, function (status) {
+			    alert('success requesting ACCESS_NOTIFICATION_POLICY permission');
+			}, function (err) {
+			    alert('failed to set permission');
+			});
+		    }
+		}, function (err) {
+		    alert(err, 'ERROR');
+		});
     },
 	
     // Update DOM on a Received Event
