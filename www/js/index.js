@@ -114,9 +114,8 @@ let app = {
 		});
 		
 		
-		let perms = ["android.permission.ACCESS_COARSE_LOCATION",
-		    "android.permission.ACCESS_FINE_LOCATION",
-		    "android.permission.ACCESS_BACKGROUND_LOCATION"
+		let perms = ["ACCESS_NOTIFICATION_POLICY",
+		   
 		];
 		app.permissions.checkPermission("android.permission.ACCESS_NOTIFICATION_POLICY", function (status) {
 		    alert('success checking permission');
