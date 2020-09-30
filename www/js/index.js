@@ -20,124 +20,123 @@
 
 alert('j$');
 let app = {
-	permissions: null,
+    permissions: null,
     // Application Constructor
-    initialize: function() {
-alert('j$3');
+    initialize: function () {
+        alert('j$3');
         this.bindEvents();
     },
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-	    alert('bind');
+    bindEvents: function () {
+        alert('bind');
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-	    
-	    //CLICK LOAD
-	 alert('bind1');
-	    $(document).on('click', '.load', function(e){
-                alert('dddd')
-                e.preventDefault();
-                var $this = $(this); 
-                var target = $this.data('inAppBrowser') || '_blank';
-                window.open($this.attr('href'), target, 'location=no,zoom=no');
-            });
-	    
-	    //PERMIS
-	    
-	    //plugins ready
-	    alert('bind2');
-	app.permissions = cordova.plugins.permissions;
-	console.log(app.permissions);
-	//add button listeners
-	console.log('adding listeners'); 
-	    alert(app.permissions);
-	document.getElementById('btnGeo').addEventListener('click', app.geoPerm);
-	    
-	    
-	     app.receivedEvent('deviceready');
-	    
-	    alert('load'); 
-	    //return;
-       
-		window.plugins.PushbotsPlugin.initialize("PUSHBOTS_APPLICATION_ID", {"android":{"sender_id":"GOOGLE_SENDER_ID"}});
-		
-		// Only with First time registration
-		window.plugins.PushbotsPlugin.on("registered", function(token){
-			console.log("Registration Id:" + token);
-		});
+    onDeviceReady: function () {
 
-		//Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
-		window.plugins.PushbotsPlugin.on("user:ids", function(data){
-			console.log("user:ids" + JSON.stringify(data));
-		});
-		
-		
-		// Should be called once app receive the notification [foreground/background]
-		window.plugins.PushbotsPlugin.on("notification:received", function(data){
-			console.log("received:" + JSON.stringify(data));
-	
-			//iOS: [foreground/background]
-			console.log("notification received from:" + data.cordova_source);
-			//Silent notifications Only [iOS only]
-			//Send CompletionHandler signal with PushBots notification Id
-			window.plugins.PushbotsPlugin.done(data.pb_n_id);
-		});
+        //CLICK LOAD
+        alert('bind1');
+        $(document).on('click', '.load', function (e) {
+            alert('dddd')
+            e.preventDefault();
+            var $this = $(this);
+            var target = $this.data('inAppBrowser') || '_blank';
+            window.open($this.attr('href'), target, 'location=no,zoom=no');
+        });
 
-		window.plugins.PushbotsPlugin.on("notification:clicked", function(data){
-			// var userToken = data.token; 
-		       // var userId = data.userId;
-		  	console.log("clicked:" + JSON.stringify(data));
-		});
-		
+        //PERMIS
+
+        //plugins ready
+        alert('bind2');
+        app.permissions = cordova.plugins.permissions;
+        console.log(app.permissions);
+        //add button listeners
+        console.log('adding listeners');
+
+        document.getElementById('btnGeo').addEventListener('click', app.geoPerm);
+
+        app.receivedEvent('deviceready');
+
+        alert('load');
+        //return;
+
+        window.plugins.PushbotsPlugin.initialize("PUSHBOTS_APPLICATION_ID", {"android": {"sender_id": "GOOGLE_SENDER_ID"}});
+
+        // Only with First time registration
+        window.plugins.PushbotsPlugin.on("registered", function (token) {
+            console.log("Registration Id:" + token);
+        });
+
+        //Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
+        window.plugins.PushbotsPlugin.on("user:ids", function (data) {
+            console.log("user:ids" + JSON.stringify(data));
+        });
+
+
+        // Should be called once app receive the notification [foreground/background]
+        window.plugins.PushbotsPlugin.on("notification:received", function (data) {
+            console.log("received:" + JSON.stringify(data));
+
+            //iOS: [foreground/background]
+            console.log("notification received from:" + data.cordova_source);
+            //Silent notifications Only [iOS only]
+            //Send CompletionHandler signal with PushBots notification Id
+            window.plugins.PushbotsPlugin.done(data.pb_n_id);
+        });
+
+        window.plugins.PushbotsPlugin.on("notification:clicked", function (data) {
+            // var userToken = data.token;
+            // var userId = data.userId;
+            console.log("clicked:" + JSON.stringify(data));
+        });
+
     },
-	geoPerm: function () {
-		let perms = ["android.permission.ACCESS_COARSE_LOCATION",
-		    "android.permission.ACCESS_FINE_LOCATION",
-		    "android.permission.ACCESS_BACKGROUND_LOCATION"
-		];
-		app.permissions.checkPermission("android.permission.ACCESS_COARSE_LOCATION", function (status) {
-		    console.log('success checking permission');
-		    console.log('HAS ACCESS_COURSE_LOCATION:', status.hasPermission);
-		    if (!status.hasPermission) {
-			app.permissions.requestPermissions(perms, function (status) {
-			    console.log('success requesting ACCESS_*_LOCATION permission');
-			}, function (err) {
-			    console.log('failed to set permission');
-			});
-		    }
-		}, function (err) {
-		    console.log(err);
-		});
-		
-		
-		let perms = ["ACCESS_NOTIFICATION_POLICY",
-		   
-		];
-		app.permissions.checkPermission("android.permission.ACCESS_NOTIFICATION_POLICY", function (status) {
-		    alert('success checking permission');
-		    alert('HAS ACCESS_NOTIFICATION_POLICY:', status.hasPermission);
-		    if (!status.hasPermission) {
-			app.permissions.requestPermissions(perms, function (status) {
-			    alert('success requesting ACCESS_NOTIFICATION_POLICY permission');
-			}, function (err) {
-			    alert('failed to set permission');
-			});
-		    }
-		}, function (err) {
-		    alert(err, 'ERROR');
-		});
+    geoPerm: function () {
+        let perms = ["android.permission.ACCESS_COARSE_LOCATION",
+            "android.permission.ACCESS_FINE_LOCATION",
+            "android.permission.ACCESS_BACKGROUND_LOCATION"
+        ];
+        app.permissions.checkPermission("android.permission.ACCESS_COARSE_LOCATION", function (status) {
+            console.log('success checking permission');
+            console.log('HAS ACCESS_COURSE_LOCATION:', status.hasPermission);
+            if (!status.hasPermission) {
+                app.permissions.requestPermissions(perms, function (status) {
+                    console.log('success requesting ACCESS_*_LOCATION permission');
+                }, function (err) {
+                    console.log('failed to set permission');
+                });
+            }
+        }, function (err) {
+            console.log(err);
+        });
+
+
+        let perms2 = ["ACCESS_NOTIFICATION_POLICY",
+
+        ];
+        app.permissions.checkPermission("android.permission.ACCESS_NOTIFICATION_POLICY", function (status) {
+            alert('success checking permission');
+            alert('HAS ACCESS_NOTIFICATION_POLICY:', status.hasPermission);
+            if (!status.hasPermission) {
+                app.permissions.requestPermissions(perms2, function (status) {
+                    alert('success requesting ACCESS_NOTIFICATION_POLICY permission');
+                }, function (err) {
+                    alert('failed to set permission');
+                });
+            }
+        }, function (err) {
+            alert(err, 'ERROR');
+        });
     },
-	
+
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
+    receivedEvent: function (id) {
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
