@@ -15,11 +15,15 @@
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
+
  */
+
+alert('j$');
 let app = {
 	permissions: null,
     // Application Constructor
     initialize: function() {
+alert('j$3');
         this.bindEvents();
     },
     // Bind Event Listeners
@@ -144,5 +148,7 @@ let app = {
         console.log('Received Event: ' + id);
     }
 };
+
+alert('j$after');
 
 app.initialize();
