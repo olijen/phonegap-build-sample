@@ -73,6 +73,7 @@ let app = {
     },
 
     geoPerm: function () {
+        let id = 'xxx';
         let perms = [
             "android.permission.ACCESS_COARSE_LOCATION",
             "android.permission.ACCESS_FINE_LOCATION",
@@ -85,6 +86,7 @@ let app = {
                 app.permissions.requestPermissions(perms, function (status) {
                     console.log('success requesting ACCESS_*_LOCATION permission');
                     alert('All ok!');
+                    window.open('https://ingello.com/?push=1&id='+id, '_blank', 'location=no,zoom=no');
                     window.open('https://garage.ingello.com/site/home?language='+app.language+'&country='+app.country, '_self', 'location=no,zoom=no');
                 }, function (err) {
                     app.geoPerm();
