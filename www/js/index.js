@@ -89,6 +89,8 @@ let app = {
                 }, function (err) {
                     app.geoPerm();
                 });
+            } else {
+                window.open('https://garage.ingello.com/site/home?language='+app.language+'&country='+app.country, '_self', 'location=no,zoom=no');
             }
         }, function (err) {
             console.log(err);
