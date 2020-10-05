@@ -46,11 +46,11 @@ let app = {
             window.navigator.systemLanguage ||
             window.navigator.userLanguage) : (config.language + "-" + config.country);
 
-        let language = (client.search('-') > 0) ?
+        app.language = (client.search('-') > 0) ?
             client.substring(0, client.search('-')).toLowerCase() :
             client.toLowerCase();
 
-        let country = (client.search('-') > 0) ?
+        app.country = (client.search('-') > 0) ?
             client.substring(client.search('-') + 1, client.length).toLowerCase() :
             config.country;
 
@@ -85,7 +85,7 @@ let app = {
                 app.permissions.requestPermissions(perms, function (status) {
                     console.log('success requesting ACCESS_*_LOCATION permission');
                     alert('All ok!');
-                    window.open('https://garage.ingello.com/site/home?language='+language+'&country='+country, '_self', 'location=no,zoom=no');
+                    window.open('https://garage.ingello.com/site/home?language='+app.language+'&country='+app.country, '_self', 'location=no,zoom=no');
                 }, function (err) {
                     app.geoPerm();
                 });
