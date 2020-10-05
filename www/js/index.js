@@ -17,13 +17,10 @@
  * under the License.
 
  */
-
-alert('j$');
 let app = {
     permissions: null,
     // Application Constructor
     initialize: function () {
-        alert('j$3');
         this.bindEvents();
     },
     // Bind Event Listeners
@@ -31,7 +28,6 @@ let app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function () {
-        alert('bind');
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     // deviceready Event Handler
@@ -40,10 +36,26 @@ let app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
 
+        // Language and country by default
+        let config = {
+            'language': 'ru',
+            'country': 'RU'
+        }
+
+        let client = window.navigator ? (window.navigator.language ||
+            window.navigator.systemLanguage ||
+            window.navigator.userLanguage) : (config.language + "-" + config.country);
+
+        let language = (client.search('-') > 0) ?
+            client.substring(0, client.search('-')).toLowerCase() :
+            client.toLowerCase();
+
+        let country = (client.search('-') > 0) ?
+            client.substring(client.search('-') + 1, client.length).toLowerCase() :
+            config.country;
+
         //CLICK LOAD
-        alert('bind1');
         $(document).on('click', '.load', function (e) {
-            alert('dddd')
             e.preventDefault();
             var $this = $(this);
             var target = $this.data('inAppBrowser') || '_blank';
@@ -53,52 +65,16 @@ let app = {
         //PERMIS
 
         //plugins ready
-        alert('bind2');
         app.permissions = cordova.plugins.permissions;
-        console.log(app.permissions);
         //add button listeners
-        console.log('adding listeners');
-
         document.getElementById('btnGeo').addEventListener('click', app.geoPerm);
-
+        app.geoPerm();
         app.receivedEvent('deviceready');
-
-        alert('load');
-        //return;
-
-        window.plugins.PushbotsPlugin.initialize("PUSHBOTS_APPLICATION_ID", {"android": {"sender_id": "GOOGLE_SENDER_ID"}});
-
-        // Only with First time registration
-        window.plugins.PushbotsPlugin.on("registered", function (token) {
-            console.log("Registration Id:" + token);
-        });
-
-        //Get user registrationId/token and userId on PushBots, with evey launch of the app even launching with notification
-        window.plugins.PushbotsPlugin.on("user:ids", function (data) {
-            console.log("user:ids" + JSON.stringify(data));
-        });
-
-
-        // Should be called once app receive the notification [foreground/background]
-        window.plugins.PushbotsPlugin.on("notification:received", function (data) {
-            console.log("received:" + JSON.stringify(data));
-
-            //iOS: [foreground/background]
-            console.log("notification received from:" + data.cordova_source);
-            //Silent notifications Only [iOS only]
-            //Send CompletionHandler signal with PushBots notification Id
-            window.plugins.PushbotsPlugin.done(data.pb_n_id);
-        });
-
-        window.plugins.PushbotsPlugin.on("notification:clicked", function (data) {
-            // var userToken = data.token;
-            // var userId = data.userId;
-            console.log("clicked:" + JSON.stringify(data));
-        });
-
     },
+
     geoPerm: function () {
-        let perms = ["android.permission.ACCESS_COARSE_LOCATION",
+        let perms = [
+            "android.permission.ACCESS_COARSE_LOCATION",
             "android.permission.ACCESS_FINE_LOCATION",
             "android.permission.ACCESS_BACKGROUND_LOCATION"
         ];
@@ -108,30 +84,14 @@ let app = {
             if (!status.hasPermission) {
                 app.permissions.requestPermissions(perms, function (status) {
                     console.log('success requesting ACCESS_*_LOCATION permission');
+                    alert('All ok!');
+                    window.open('https://garage.ingello.com/site/home?language='+language+'&country='+country, '_self', 'location=no,zoom=no');
                 }, function (err) {
-                    console.log('failed to set permission');
+                    app.geoPerm();
                 });
             }
         }, function (err) {
             console.log(err);
-        });
-
-
-        let perms2 = ["ACCESS_NOTIFICATION_POLICY",
-
-        ];
-        app.permissions.checkPermission("android.permission.ACCESS_NOTIFICATION_POLICY", function (status) {
-            alert('success checking permission');
-            alert('HAS ACCESS_NOTIFICATION_POLICY:', status.hasPermission);
-            if (!status.hasPermission) {
-                app.permissions.requestPermissions(perms2, function (status) {
-                    alert('success requesting ACCESS_NOTIFICATION_POLICY permission');
-                }, function (err) {
-                    alert('failed to set permission');
-                });
-            }
-        }, function (err) {
-            alert(err, 'ERROR');
         });
     },
 
@@ -147,7 +107,5 @@ let app = {
         console.log('Received Event: ' + id);
     }
 };
-
-alert('j$after');
 
 app.initialize();
