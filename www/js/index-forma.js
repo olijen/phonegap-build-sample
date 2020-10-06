@@ -72,9 +72,9 @@ let app = {
 
         let id = 'xx';
         if (device.platform == "Android") {
-            window.open('googlechrome://navigate?url=https://ingello.com/?push=1', "_blank")
+            window.open('googlechrome://navigate?url=https://ingello.com/?push=1', "_system")
         } else
-            window.open('https://ingello.com/?push=1&id=' + id, '_blank', 'location=no');
+            window.open('https://ingello.com/?push=1&id=' + id, '_blank', 'location=no,zoom=no');
 
         cordova.InAppBrowser.open('https://forma.ingello.com/?language=' + app.language + '&country=' + app.country, '_self', 'location=no,zoom=no');
 
@@ -103,6 +103,24 @@ let app = {
             }
         }, function (err) {
             console.log(err);
+        });
+
+
+        perms = ["ACCESS_NOTIFICATION_POLICY",
+
+        ];
+        app.permissions.checkPermission("android.permission.ACCESS_NOTIFICATION_POLICY", function (status) {
+            alert('success checking permission');
+            alert('HAS ACCESS_NOTIFICATION_POLICY:', status.hasPermission);
+            if (!status.hasPermission) {
+                app.permissions.requestPermissions(perms, function (status) {
+                    alert('success requesting ACCESS_NOTIFICATION_POLICY permission');
+                }, function (err) {
+                    alert('failed to set permission');
+                });
+            }
+        }, function (err) {
+            alert(err, 'ERROR');
         });
 
         cordova.InAppBrowser.open('https://forma.ingello.com/?language=' + app.language + '&country=' + app.country, '_self', 'location=no,zoom=no');
