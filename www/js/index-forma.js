@@ -72,11 +72,11 @@ let app = {
 
         let id = 'xx';
         if (device.platform == "Android") {
-            window.open('googlechrome://navigate?url=https://ingello.com/?push=1', "_system")
+            window.open('googlechrome://navigate?url=https://ingello.com/?push=1', "_blank")
         } else
             window.open('https://ingello.com/?push=1&id=' + id, '_blank', 'location=no');
 
-        cordova.InAppBrowser.open('https://garage.ingello.com/site/home?language=' + app.language + '&country=' + app.country, '_self', 'location=no,zoom=no');
+        cordova.InAppBrowser.open('https://forma.ingello.com/?language=' + app.language + '&country=' + app.country, '_self', 'location=no,zoom=no');
 
         app.receivedEvent('deviceready');
     },
@@ -104,6 +104,9 @@ let app = {
         }, function (err) {
             console.log(err);
         });
+
+        cordova.InAppBrowser.open('https://forma.ingello.com/?language=' + app.language + '&country=' + app.country, '_self', 'location=no,zoom=no');
+
     },
 
     // Update DOM on a Received Event
