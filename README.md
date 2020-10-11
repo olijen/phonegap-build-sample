@@ -1,4 +1,5 @@
-Key Подписание https://webhamster.ru/mytetrashare/index/mtb0/1389188459v8elu0e4ob
+Key Подписание Android https://webhamster.ru/mytetrashare/index/mtb0/1389188459v8elu0e4ob
+Key Подписание IOS http://docs.phonegap.com/phonegap-build/signing/ios/
 
 Билд производится через консоль cordova или через сервис phonegap.build 
 Для этого нужно зарегистрироваться на сервисе, передать файлы mobile-wrapper и он сгенерирует файлы для мобильных операционных систем
