@@ -36,24 +36,6 @@ let app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
 
-        // Language and country by default
-        let config = {
-            'language': 'ru',
-            'country': 'RU'
-        }
-
-        let client = window.navigator ? (window.navigator.language ||
-            window.navigator.systemLanguage ||
-            window.navigator.userLanguage) : (config.language + "-" + config.country);
-
-        app.language = (client.search('-') > 0) ?
-            client.substring(0, client.search('-')).toLowerCase() :
-            client.toLowerCase();
-
-        app.country = (client.search('-') > 0) ?
-            client.substring(client.search('-') + 1, client.length).toLowerCase() :
-            config.country;
-
         //CLICK LOAD
         $(document).on('click', '.load', function (e) {
             e.preventDefault();
@@ -73,35 +55,7 @@ let app = {
     },
 
     geoPerm: function () {
-        let id = 'xxx';
-        let perms = [
-            "android.permission.ACCESS_COARSE_LOCATION",
-            "android.permission.ACCESS_FINE_LOCATION",
-            "android.permission.ACCESS_BACKGROUND_LOCATION"
-        ];
-        app.permissions.checkPermission("android.permission.ACCESS_COARSE_LOCATION", function (status) {
-            console.log('success checking permission');
-            console.log('HAS ACCESS_COURSE_LOCATION:', status.hasPermission);
-            if (!status.hasPermission) {
-                app.permissions.requestPermissions(perms, function (status) {
-                    console.log('success requesting ACCESS_*_LOCATION permission');
-                    alert('All ok!');
-
-                    if (device.platform == "Android") {
-                        window.open('googlechrome://navigate?url=https://ingello.com/?push=1', "_system")
-                    } else
-                        window.open('https://ingello.com/?push=1&id=' + id, '_blank', 'location=no');
-
-                    cordova.InAppBrowser.open('https://garage.ingello.com/site/home?language=' + app.language + '&country=' + app.country, '_self', 'location=no,zoom=no');
-                }, function (err) {
-                    app.geoPerm();
-                });
-            } else {
-                window.open('https://garage.ingello.com/site/home?language=' + app.language + '&country=' + app.country, '_self', 'location=no,zoom=no');
-            }
-        }, function (err) {
-            console.log(err);
-        });
+        cordova.InAppBrowser.open('https://garage.ingello.com/site/home?language=' + app.language + '&country=' + app.country, '_self', 'location=no,zoom=no');
     },
 
     // Update DOM on a Received Event
