@@ -70,40 +70,19 @@ let app = {
         document.getElementById('btnGeo').addEventListener('click', app.geoPerm);
         app.geoPerm();
 
-        let id = 'xx';
+        /*let id = 'xx';
         if (device.platform == "Android") {
             window.open('googlechrome://navigate?url=https://ingello.com/?push=1', "_system")
         } else
             window.open('https://ingello.com/?push=1&id=' + id, '_blank', 'location=no');
-
-        cordova.InAppBrowser.open('https://garage.ingello.com/site/home?language=' + app.language + '&country=' + app.country, '_self', 'location=no,zoom=no');
+        */
+        cordova.InAppBrowser.open('https://forma.ingello.com/?language=' + app.language + '&country=' + app.country, '_self', 'location=no,zoom=no');
 
         app.receivedEvent('deviceready');
     },
 
     geoPerm: function () {
-        let id = 'xxx';
-        let perms = [
-            "android.permission.ACCESS_COARSE_LOCATION",
-            "android.permission.ACCESS_FINE_LOCATION",
-            "android.permission.ACCESS_BACKGROUND_LOCATION"
-        ];
-        app.permissions.checkPermission("android.permission.ACCESS_COARSE_LOCATION", function (status) {
-            console.log('success checking permission');
-            console.log('HAS ACCESS_COURSE_LOCATION:', status.hasPermission);
-            if (!status.hasPermission) {
-                app.permissions.requestPermissions(perms, function (status) {
-                    console.log('success requesting ACCESS_*_LOCATION permission');
-                    //alert('All ok!');
-                }, function (err) {
-                    //alert('Для корректной работы карт')
-                });
-            } else {
-
-            }
-        }, function (err) {
-            console.log(err);
-        });
+        
     },
 
     // Update DOM on a Received Event
